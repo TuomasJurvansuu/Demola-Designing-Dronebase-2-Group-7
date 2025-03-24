@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/routeplanner" element={<RoutePlanner />} /> 
+        <Route path="/route-planner" element={<RoutePlanner />} /> 
         <Route path="/status" element={<Status />} />
         <Route path="/manual" element={<ManualControl />} />
         <Route path="/settings" element={<Settings />} />
