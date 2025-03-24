@@ -6,6 +6,7 @@ import RoutePlanner from "./pages/RoutePlanner";
 import Status from "./pages/Status";
 import ManualControl from "./pages/ManualControl";
 import Settings from "./pages/Settings";
+import "./styles/global.css";
 
 function App() {
   return (
