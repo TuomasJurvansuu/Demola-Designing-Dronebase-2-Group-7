@@ -1,0 +1,20 @@
+.BatteryStatus {
+    background-color: #101010;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #00aaff;
+    width: 300px;
+    text-align: center;
+    margin: 20px auto;
+    border: 2px solid #00aaff;
+}
+
+.BatteryStatus h3 {
+    color: #00aaff;
+    margin-bottom: 10px;
+}
+
+.BatteryStatus p {
+    font-size: 18px;
+    font-weight: bold;
+}

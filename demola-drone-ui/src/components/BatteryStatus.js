@@ -1,10 +1,12 @@
 import React from "react";
+import "../styles/batterystatus.css";
 
-export default function BatteryStatus({ level }) {
+export default function BatteryStatus({ level1, level2 }) {
   return (
-    <div style={{ padding: "10px", border: "1px solid #ccc", borderRadius: "5px" }}>
-      <h3>Akku</h3>
-      <p>{level}%</p>
+    <div className="BatteryStatus">
+      <h3>Battery Status</h3>
+      <p>Battery 1: {level1}%</p>
+      <p>Battery 2: {level2}%</p>
     </div>
   );
 }
