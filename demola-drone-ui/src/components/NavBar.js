@@ -1,15 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "../styles/navbar.css";
 
 const Navbar = () => {
   return (
-    <nav style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
-      <ul style={{ listStyle: "none", display: "flex", gap: "15px" }}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/routeplanner">Route Planner</Link></li>
-        <li><Link to="/status">Status</Link></li>
-        <li><Link to="/manual">Manual Control</Link></li>
-        <li><Link to="/settings">Settings</Link></li>
+    <nav className="navbar">
+      <ul className="nav-list">
+        <li><NavLink to="/" className="nav-link">Home</NavLink></li>
+        <li><NavLink to="/routeplanner" className="nav-link">Route Planner</NavLink></li>
+        <li><NavLink to="/status" className="nav-link">Status</NavLink></li>
+        <li><NavLink to="/manual" className="nav-link">Manual Control</NavLink></li>
+        <li><NavLink to="/settings" className="nav-link">Settings</NavLink></li>
       </ul>
     </nav>
   );
