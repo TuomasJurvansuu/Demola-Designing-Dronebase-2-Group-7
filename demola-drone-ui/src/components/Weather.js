@@ -24,6 +24,7 @@ const Weather = () => {
           <p> Temperature: {weatherData.main.temp}°C</p>
           <p> Wind Speed: {weatherData.wind.speed} m/s</p>
           <p> Condition: {weatherData.weather[0].description}</p>
+          <p> Humidity: {weatherData.main.humidity}%</p>
         </div>
       ) : (
         <p>Loading weather data...</p>
