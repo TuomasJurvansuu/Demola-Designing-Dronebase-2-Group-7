@@ -2,6 +2,7 @@
     padding: 20px;
     text-align: center;
     color: #fff;
+    
 }
 
 .home-header {
@@ -13,12 +14,6 @@
     border: 2px solid #00aaff;
 }
 
-.home-header h1 {
-    font-size: 32px;
-    margin: 0;
-    color: #00aaff;
-}
-
 .home-header p {
     font-size: 18px;
     color: #ccc;
@@ -27,7 +22,7 @@
 .status-section {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     gap: 20px;
     margin-top: 20px;
 }
