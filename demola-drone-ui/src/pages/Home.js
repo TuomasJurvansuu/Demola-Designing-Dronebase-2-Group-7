@@ -4,12 +4,13 @@ import DroneStatus from "../components/DroneStatus";
 import DroneMap from "../components/DroneMap";
 import "../styles/home.css";
 import DroneTelemetry from "../components/DroneTelemetry";
+import Weather from "../components/Weather";
 
 export default function Home() {
   const [battery1] = useState(85);
   const [battery2] = useState(100);
 
-  const [telemetry, setTelemetry] = useState({
+  const [telemetry] = useState({
     altitude: 2, // metriä
     speed: 0, // km/h
     coordinates: { lat: 65.0121, lng: 25.4651 }, // Oulu
@@ -34,6 +35,7 @@ export default function Home() {
           speed={telemetry.speed}
           coordinates={telemetry.coordinates}
         />
+        <Weather /> 
     </div>
   </div>
 
