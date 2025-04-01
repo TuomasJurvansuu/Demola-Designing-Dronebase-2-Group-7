@@ -20,7 +20,7 @@ export default function Home() {
     <div className="home-container">
       <header className="home-header">
         <h2>Dronebase Dashboard</h2>
-        <p>Monitor the status of your drone and batteries in real time.</p>
+        <p>Monitor the status of your drones and batteries in real time.</p>
       </header>
       
       <div className="status-section">
