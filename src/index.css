@@ -1,0 +1,114 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 10%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 180 100% 50%; /* Cyan accent */
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 320 100% 50%; /* Magenta accent */
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 142 100% 50%; /* Green accent */
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 180 100% 50%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 222 47% 13%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 16%;
+    --sidebar-ring: 180 100% 50%;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.drone.darker');
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.drone.accent1');
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.drone.accent2');
+}
+
+/* Custom Classes */
+@layer components {
+  .glass-card {
+    @apply bg-black/30 backdrop-blur-md border border-white/10 shadow-lg;
+  }
+  
+  .card-glow {
+    @apply relative;
+  }
+  
+  .card-glow::after {
+    @apply content-[''] absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
+    box-shadow: 0 0 15px 2px theme('colors.drone.accent1');
+  }
+  
+  .card-glow:hover::after {
+    @apply opacity-100;
+  }
+  
+  .accent1-glow {
+    text-shadow: 0 0 10px theme('colors.drone.accent1'), 
+                 0 0 20px theme('colors.drone.accent1');
+  }
+  
+  .accent2-glow {
+    text-shadow: 0 0 10px theme('colors.drone.accent2'), 
+                 0 0 20px theme('colors.drone.accent2');
+  }
+  
+  .accent3-glow {
+    text-shadow: 0 0 10px theme('colors.drone.accent3'), 
+                 0 0 20px theme('colors.drone.accent3');
+  }
+  
+  .grid-bg {
+    background-size: 30px 30px;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+}
+
+body {
+  @apply bg-drone-dark text-foreground antialiased min-h-screen overflow-x-hidden;
+  background-image: linear-gradient(to bottom right, theme('colors.drone.dark'), theme('colors.drone.darker'));
+}
+
+#root {
+  @apply w-full max-w-none p-0 m-0;
+}
