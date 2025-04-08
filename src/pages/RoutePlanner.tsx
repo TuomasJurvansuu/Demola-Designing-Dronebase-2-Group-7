@@ -1,15 +1,81 @@
-
-import React from 'react';
-import { MapPin, Plus, Trash, RotateCcw, Save, Play } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMapEvents } from 'react-leaflet';
+import { Icon } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { Trash, RotateCcw, Save, Play } from 'lucide-react';
 
 const RoutePlanner = () => {
-  // Mock waypoints
-  const waypoints = [
+  const [waypoints, setWaypoints] = useState([
     { id: 1, name: 'Start Point', lat: 60.192059, lng: 24.945831, altitude: 50 },
     { id: 2, name: 'Checkpoint A', lat: 60.193100, lng: 24.946900, altitude: 80 },
     { id: 3, name: 'Checkpoint B', lat: 60.194200, lng: 24.947800, altitude: 100 },
     { id: 4, name: 'Return Point', lat: 60.192059, lng: 24.945831, altitude: 50 }
-  ];
+  ]);
+
+  const startIcon = new Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+  const endIcon = new Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+  const waypointIcon = new Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+  const getIcon = (index) => {
+    if (index === 0) return startIcon;
+    if (index === waypoints.length - 1) return endIcon;
+    return waypointIcon;
+  };
+
+  const flightPath = waypoints.map(point => [point.lat, point.lng]);
+
+  const MapClickHandler = () => {
+    useMapEvents({
+      click: (e) => {
+        const { lat, lng } = e.latlng;
+        const newWaypoint = {
+          id: waypoints.length + 1,
+          name: `Checkpoint ${String.fromCharCode(65 + waypoints.length - 1)}`,
+          lat,
+          lng,
+          altitude: 80
+        };
+        
+        const newWaypoints = [
+          ...waypoints.slice(0, -1),
+          newWaypoint,
+          waypoints[waypoints.length - 1]
+        ];
+        
+        setWaypoints(newWaypoints);
+      }
+    });
+    return null;
+  };
+
+  const removeWaypoint = (id) => {
+    if (waypoints.length <= 2) return;
+    
+    setWaypoints(waypoints.filter(point => point.id !== id));
+  };
   
   return (
     <div className="container py-8 px-4 mx-auto">
@@ -25,49 +91,42 @@ const RoutePlanner = () => {
               <h2 className="text-lg font-medium text-drone-accent1">Map View</h2>
               <div className="flex items-center space-x-2">
                 <button className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
-                  <Plus className="h-4 w-4 text-white" />
-                </button>
-                <button className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
                   <RotateCcw className="h-4 w-4 text-white" />
                 </button>
               </div>
             </div>
             
-            <div className="relative h-full grid-bg">
-              {/* Map placeholder */}
-              <div className="absolute inset-0 flex items-center justify-center text-white/30">
-                Map View
-              </div>
-              
-              {/* Waypoint indicators */}
-              {waypoints.map((point, index) => (
-                <div 
-                  key={point.id}
-                  className={`absolute ${index === 0 ? 'text-drone-accent3' : 
-                                         index === waypoints.length - 1 ? 'text-drone-accent2' : 
-                                         'text-drone-accent1'}`}
-                  style={{
-                    left: `${20 + index * 20}%`,
-                    top: `${30 + (index % 2) * 30}%`
-                  }}
-                >
-                  <MapPin className="h-6 w-6" />
-                  <div className="absolute w-6 text-xs text-center font-bold" style={{ top: '6px' }}>
-                    {index + 1}
-                  </div>
-                </div>
-              ))}
-              
-              {/* Route path */}
-              <svg className="absolute inset-0 w-full h-full" style={{ zIndex: -1 }}>
-                <path 
-                  d="M 100,150 L 200,180 L 300,210 L 400,150" 
-                  stroke="rgba(0, 255, 255, 0.6)" 
-                  strokeWidth="2" 
-                  fill="none" 
-                  strokeDasharray="5,5" 
+            <div className="relative h-[calc(600px-64px)]">
+              <MapContainer 
+                center={[60.192059, 24.945831]} 
+                zoom={13} 
+                style={{ height: "100%", width: "100%" }}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-              </svg>
+                
+                {waypoints.map((point, index) => (
+                  <Marker 
+                    key={point.id} 
+                    position={[point.lat, point.lng]} 
+                    icon={getIcon(index)}
+                  >
+                    <Popup>
+                      {point.name}<br />
+                      Altitude: {point.altitude}m
+                    </Popup>
+                  </Marker>
+                ))}
+                
+                <Polyline 
+                  positions={flightPath}
+                  pathOptions={{ color: 'rgba(0, 255, 255, 0.6)', dashArray: '5, 5' }}
+                />
+                
+                <MapClickHandler />
+              </MapContainer>
             </div>
           </div>
         </div>
@@ -76,12 +135,10 @@ const RoutePlanner = () => {
           <div className="glass-card card-glow rounded-lg overflow-hidden">
             <div className="p-4 border-b border-white/10 flex justify-between items-center">
               <h2 className="text-lg font-medium text-drone-accent1">Waypoints</h2>
-              <button className="py-1 px-3 rounded bg-drone-accent1/20 text-drone-accent1 text-sm hover:bg-drone-accent1/30 transition-colors">
-                Add Point
-              </button>
+              <div className="text-xs text-white/60">Click on map to add points</div>
             </div>
             
-            <div className="divide-y divide-white/10">
+            <div className="divide-y divide-white/10 max-h-[500px] overflow-y-auto">
               {waypoints.map((point, index) => (
                 <div key={point.id} className="p-4 hover:bg-white/5 transition-colors">
                   <div className="flex justify-between items-center">
@@ -100,7 +157,13 @@ const RoutePlanner = () => {
                         </p>
                       </div>
                     </div>
-                    <button className="p-1 text-white/60 hover:text-drone-danger transition-colors">
+                    <button 
+                      className={`p-1 text-white/60 hover:text-drone-danger transition-colors ${
+                        waypoints.length <= 2 ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
+                      onClick={() => removeWaypoint(point.id)}
+                      disabled={waypoints.length <= 2}
+                    >
                       <Trash className="h-4 w-4" />
                     </button>
                   </div>
