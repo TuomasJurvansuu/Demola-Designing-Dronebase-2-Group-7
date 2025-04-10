@@ -22,7 +22,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
-            <span className="text-drone-accent1 text-xl font-bold tracking-wider accent1-glow">DRONE<span className="text-white font-light">BASE</span></span>
+          <span className="text-drone-accent1 text-xl font-bold tracking-wider accent1-glow">ARCTIC DRONE<span className="text-white font-light">BASE</span></span>
           </div>
           
           {/* Desktop menu */}
