@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Clock, Calendar } from 'lucide-react';
 
@@ -19,7 +18,6 @@ const LiveClock = () => {
     return date.toLocaleTimeString('fi-FI', { 
       hour: '2-digit', 
       minute: '2-digit',
-      second: '2-digit',
       hour12: false
     });
   };
