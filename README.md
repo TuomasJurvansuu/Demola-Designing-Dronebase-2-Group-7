@@ -32,7 +32,7 @@ http://localhost:8080/
 Julkaisu:  
 Firebase-julkaisu tulossa myöhemmin.
 
-##Projektiryhmä  
+## Projektiryhmä  
 [Johannes Päivärinta](https://github.com/PaivarintaJohannes)
 
 
