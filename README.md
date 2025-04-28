@@ -1,5 +1,7 @@
 # Drone-base-ui
-A mockup user interface project created as part of the Demola project Designing Dronebase 2.  
+An innovation project: 
+
+a mockup user interface created as part of the Demola project Designing Dronebase 2.
 
 The main material of the project consists of 3D models, which, along with essential images and project files, can be found in the documents folder.  
 
