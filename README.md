@@ -115,6 +115,18 @@ http://localhost:8080/
 ### Deployment:
 Firebase deployment coming later.
 
+### This project was made using:
+
+React
+
+Tailwind CSS
+
+Blender
+
+Fuzion 360
+
+and other supporting tools
+
 ## Project Team
 [Johannes Päivärinta](https://github.com/PaivarintaJohannes)  
 3D modeling, animation, and hardware component design 
