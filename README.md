@@ -123,7 +123,7 @@ Tailwind CSS
 
 Blender
 
-Fuzion 360
+Autodesk Fuzion
 
 and other supporting tools
 
