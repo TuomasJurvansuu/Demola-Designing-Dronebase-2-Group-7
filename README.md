@@ -96,6 +96,9 @@ npm install
 or if you use yarn:  
 
 
+yarn
+
+
 Start the development server with the command:  
 
 
