@@ -1,4 +1,4 @@
-# Drone-base-ui
+# BorealDronePort
 An innovation project: 
 
 A mockup user interface created as part of the Demola project Designing Dronebase 2.
